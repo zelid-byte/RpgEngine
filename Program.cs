@@ -1,8 +1,6 @@
 using ConsoleApp1;
 
-Hero warrior = new("Воин", 100, 15,100) {Gold=150};
-HealthPotion healthPotion = new HealthPotion{Name="зелье исцеления", HealAmount = 30};
-warrior.Items.Add(healthPotion);
+Hero warrior = SaveSystem.LoadHero();
 
 Store store = new Store();
 
@@ -18,7 +16,7 @@ while (InGame)
     Console.WriteLine("1. Сходить в Подземелье (Данж)");
     Console.WriteLine("2. Зайти в Лавку Торговца (Магазин)");
     Console.WriteLine("3. Персонаж и Инвентарь");
-    Console.WriteLine("0. Выйти из игры");
+    Console.WriteLine("0. Сохраниться и выйти");
     Console.WriteLine("========================================");
     Console.Write("Выбери действие: ");
     Console.ForegroundColor = ConsoleColor.White;
@@ -37,8 +35,9 @@ while (InGame)
             Console.WriteLine(warrior.ToString());
             warrior.ShowInventory();
             WaitKey();
-            break;
+            break; 
         case 0:
+            SaveSystem.SaveHero(warrior);
             Console.WriteLine("вы ходите из игры!");
             WaitKey();
             InGame = false;
@@ -71,7 +70,7 @@ void StartDange()
    for (int room= 0; room < 5; room++)
 {
     Console.WriteLine($"\n=== Вы в {room+1} комнате из 5 ===");
-    Hero enemy = EnemyFactory.CreateGoblin();
+    Hero enemy = EnemyFactory.GetRandomEnemy();
 
 
     while (warrior.IsAlive && enemy.IsAlive)

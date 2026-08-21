@@ -86,7 +86,7 @@ public class Hero
     }
     public Hero (string name, int maxHealth, int damage, int health, int dodgeChance=10)
     {this.Name=name; this.MaxHealth=maxHealth;  this.Damage=damage; this.Health=health;  this.DodgeChance=dodgeChance;}
-
+    public Hero() {}
     public void Attack(Hero target)
     {
         Random rnd = new Random();
@@ -225,7 +225,7 @@ public class Hero
         Console.WriteLine("--- Инвентарь ---");
         for (int i = 0; i < Items.Count; i++)
         {
-            Console.WriteLine($"[{i + 1}] {Items[i].ToString()}");
+            Console.WriteLine($"[{i + 1}] {Items[i]}");
         }
     }
 };
